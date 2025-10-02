@@ -44,11 +44,28 @@ def wake_up_dog():
 
     update_dog_attributes(game_save, dog)
 
-    return jsonify({"message":f"{dog.name} waked up!"}), 200
+    return jsonify({"message": f"{dog.name} waked up!"}), 200
 
 @dog_api_blueprint.route("/feed", methods=["GET"])
 def feed_dog():
-    return "feed"
+    game_save = request.args.get("save")
+    if game_save is None:
+        return "Save parameter is none", 400
+
+    game = find_game_by_uuid(game_save)
+    if game is None:
+        return "Inexistent game", 404
+    
+    dog = Dog(game[1], game[2], game[3], game[4], game[5], game[6])
+    
+    try:
+        dog.feed()
+    except Exception as e:
+        return jsonify({"message": str(e)}), 400
+
+    update_dog_attributes(game_save, dog)
+
+    return jsonify({"message": f"{dog.name} received food!"}), 200
 
 @dog_api_blueprint.route("/play", methods=["GET"])
 def play_with_dog():
