@@ -1,13 +1,13 @@
 class Dog:
-    def __init__(self, name: str, breed: str) -> None:        
+    def __init__(self, name: str, breed: str, hunger: int = 0, fatigue: int = 0, sleeping: bool = True, dead: bool = False) -> None:
         self.name = name.strip().capitalize()
         self.breed = breed.strip().lower()
-        self.hunger = 0
-        self.fatigue = 0
+        self.hunger = hunger
+        self.fatigue = fatigue
+        self.sleeping = sleeping
+        self.dead = dead
         self.MAX_HUNGER = 6
         self.MAX_FATIGUE = 5
-        self.sleeping = True
-        self.dead = False
 
     def wake_up(self) -> None:
         if not self.__is_sleeping():
