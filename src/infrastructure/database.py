@@ -13,7 +13,6 @@ def initialize_database():
                        dog_fatigue INTEGER NOT NULL DEFAULT 0,
                        dog_is_sleeping BOOLEAN NOT NULL DEFAULT TRUE,
                        dog_is_dead BOOLEAN NOT NULL DEFAULT FALSE)""")
-        
         connection.commit()
 
 def create_game(game_uuid: str) -> None:
