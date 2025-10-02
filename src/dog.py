@@ -17,7 +17,6 @@ class Dog:
             raise Exception(f"{self.name} cannot wake up, he died...")
         
         self.sleeping = False
-        print(f"{self.name} wake up!")
 
     def feed(self) -> None:
         if self.hunger < self.MAX_HUNGER - 4:
@@ -53,7 +52,7 @@ class Dog:
         
         print(f"{self.name} played!")
 
-    def show_status(self) -> tuple[str, str, int, int, bool, bool]:
+    def get_status(self) -> tuple[str, str, int, int, bool, bool]:
         return (self.name, self.breed, self.hunger, self.fatigue, self.sleeping, self.dead)
     
     def sleep(self) -> None:
