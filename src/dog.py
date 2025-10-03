@@ -19,11 +19,11 @@ class Dog:
         self.sleeping = False
 
     def feed(self) -> None:
-        if self.hunger < self.MAX_HUNGER - 4:
-            raise Exception(f"{self.name} doesn't need to eat.")
-
         if self.__is_sleeping():
             raise Exception(f"{self.name} cannot eat, he's sleeping.")
+        
+        if self.hunger < self.MAX_HUNGER - 4:
+            raise Exception(f"{self.name} doesn't need to eat.")
         
         if not self.__is_alive():
             raise Exception(f"{self.name} cannot eat, he died...")
@@ -64,7 +64,6 @@ class Dog:
 
         self.sleeping = True
         self.fatigue = 0
-        print(f"{self.name} is sleeping...")
 
     def __is_sleeping(self) -> bool:
         return self.sleeping
