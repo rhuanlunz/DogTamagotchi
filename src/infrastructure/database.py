@@ -1,5 +1,5 @@
 import sqlite3
-from dog import Dog
+from entities.dog import Dog
 
 DATABASE_PATH = "./database.db"
 
