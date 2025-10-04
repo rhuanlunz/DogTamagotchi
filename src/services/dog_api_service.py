@@ -1,37 +1,37 @@
-from uuid import UUID
 from infrastructure.database import find_game_by_uuid, update_dog_attributes
 from entities.dog_response import DogResponse
 from entities.dog import Dog
+from uuid import UUID
 
 def show_dog_status_service(game_uuid: str | None) -> DogResponse:
-    game = __get_validated_game(game_uuid)    
-    response = __parse_db_data_to_response(game)
+    game = __get_validated_game(game_uuid)
+    response = __serialize_response_from_db(game)
     return response
 
 def wake_up_dog_service(game_uuid: str | None) -> str:
     game = __get_validated_game(game_uuid)
-    dog = __parse_db_data_to_dog(game)
+    dog = __serialize_dog_from_db(game)
     dog.wake_up()
     update_dog_attributes(game_uuid=game[0], dog=dog)
     return f"{dog.name} waked up!"
 
 def feed_dog_service(game_uuid: str | None) -> str:
     game = __get_validated_game(game_uuid)
-    dog = __parse_db_data_to_dog(game)
+    dog = __serialize_dog_from_db(game)
     dog.feed()
     update_dog_attributes(game_uuid=game[0], dog=dog)
     return f"{dog.name} received food!"
 
 def play_with_dog_service(game_uuid: str | None) -> str:
     game = __get_validated_game(game_uuid)
-    dog = __parse_db_data_to_dog(game)
+    dog = __serialize_dog_from_db(game)
     dog.play()
     update_dog_attributes(game_uuid=game[0], dog=dog)
     return f"{dog.name} played!"
 
 def sleep_dog_service(game_uuid: str | None) -> str:
     game = __get_validated_game(game_uuid)
-    dog = __parse_db_data_to_dog(game)
+    dog = __serialize_dog_from_db(game)
     dog.sleep()
     update_dog_attributes(game_uuid=game[0], dog=dog)
     return f"{dog.name} is sleeping..."
@@ -57,7 +57,7 @@ def __is_valid_uuid_format(uuid: str) -> bool:
     
     return True
 
-def __parse_db_data_to_response(database_game_data: tuple[str, str, str, int, int, bool, bool]) -> DogResponse:
+def __serialize_response_from_db(database_game_data: tuple[str, str, str, int, int, bool, bool]) -> DogResponse:
     response: DogResponse = {
         "dog_name": database_game_data[1],
         "dog_bread": database_game_data[2],
@@ -68,7 +68,7 @@ def __parse_db_data_to_response(database_game_data: tuple[str, str, str, int, in
     }
     return response
 
-def __parse_db_data_to_dog(database_game_data: tuple[str, str, str, int, int, bool, bool]) -> Dog:
+def __serialize_dog_from_db(database_game_data: tuple[str, str, str, int, int, bool, bool]) -> Dog:
     dog = Dog(
         name=database_game_data[1], 
         breed=database_game_data[2], 

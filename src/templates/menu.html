@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pablo - Menu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+    <script src="{{ url_for('static', filename='dist/jquery-3.7.1.min.js') }}"></script>
+</head>
+<body>
+    <section class="menu-section">
+        <header class="menu-header">
+            <h1 id="header-title"> ~ Pablo. ~</h1>
+        </header>
+        <nav>
+            <button id="new-game-btn" class="btn green" type="button">Novo Jogo</button>
+            <button id="load-game-btn" class="btn blue" type="button">Carregar Jogo</button>
+        </nav>
+        <footer>
+            <button id="how-to-play-btn" class="special-btn" type="button">?</button>
+            <button id="about-btn" class="special-btn" type="button">i</button>
+        </footer>
+    </section>
+
+    <dialog id="how-to-play-dialog" class="dialog how-to-play-dialog-color">
+        <main>
+            <header class="dialog-header">
+                <h1 class="dialog-title center">Como Jogar</h1>
+                <p>Bem-vido ao Pablo. Neste jogo, o seu objetivo é cuidar do seu Pablo., garantindo que ele se divirta, se alimente e descanse. Caso contrário, ele morre.</p>    
+            </header>
+
+            <hr class="separator">
+
+            <section class="dialog-section">
+                <h2 class="dialog-title">Início:</h2>
+                <p>Seu Pablo. começa dormindo, com Fome = 0 e Cansaço = 0.</p>
+            </section>
+
+            <section>
+                <h2 class="dialog-title">Ações</h2>
+                <ul>
+                    <li>Brincar: Aumenta +1 Fome e +1 Cansaço.</li>
+                    <li>Alimentar: Zera a Fome do Pablo.</li>
+                    <li>Dormir: O Pablo. dorme automaticamente ao atingir 5 de Cansaço, e o Cansaço é zerado.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="dialog-title">Limites</h2>
+                <ul>
+                    <li>Fome = 6: O Pablo. morre.</li>
+                    <li>Cansaço = 5: O Pablo. dorme automaticamente.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="dialog-title">Dicas</h2>
+                <ul>
+                    <li>Brinque com moderação para evitar que o Pablo. morra de fome ou fique cansado demais.</li>
+                    <li>Alimente o Pablo. regularmente para manter a Fome em 0.</li>
+                    <li>Deixe o Pablo. descansar se ele estiver muito cansado.</li>
+                </ul>
+            </section>
+        </main>
+        
+        <hr class="separator">
+
+        <footer class="dialog-footer">
+            <button id="close-how-to-play-dialog" class="btn green">Okei, chefi hihihihi</button>
+        </footer>
+    </dialog>
+
+    <dialog id="about-dialog" class="dialog about-dialog-color">
+        <main>
+            <header class="dialog-header">
+                <h1 class="dialog-title center">Sobre</h1>
+                <p>"Pablo." é um Tamagotchi-like simples desenvolvido em menos de 1 semana por Rhuan Lunz, estudante de Sistemas de Informação na UNESC.</p>
+            </header>
+
+            <hr class="separator">
+
+            <section>
+                <h2 class="dialog-title">Tecnologias</h2>
+                <p>As tecnologias usadas foram:</p>
+                <ul>
+                    <li>Python Flask (Back-End)</li>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                    <li>jQuery</li>
+                    <li>SQLite3</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="dialog-title">Gostaria de contribuir?</h2>
+                <p>Procure Bugs, implemente features novas, melhore o que existe e, após isso, faça um Pull Request ou crie sua própria versão, seja livre! Só lembre de dar os créditos para o projeto original ;)</p>
+                <p>O código dessa aplicação está disponível no meu GitHub, é só escanear o mano alí em baixo que você chega lá...</p>
+                <p>Acredite se quiser, por mais simples que tudo isso seja, deu muito trabalho, por isso, dá uma estrelinha aí hahaha.</p>
+            </section>
+        </main>
+        
+        <hr class="separator">
+
+        <footer class="dialog-footer">
+            <button id="close-about-dialog" class="btn green">Inserir texto</button>
+        </footer>
+    </dialog>
+
+    <dialog id="load-game-dialog" class="dialog load-game-dialog-color">
+        <main>
+            <label for="game-uuid">Insira o identificador do jogo:</label>
+            <span id="input-error" hidden>Amigão, o identificador precisa existir e ser válido, seu burro...</span>
+            
+            <input type="text" id="game-uuid" name="game-uuid" placeholder="na minha máquina funcionou..." class="inp">
+        </main>
+        
+        <br>
+
+        <footer class="dialog-footer">
+            <button id="send-game-uuid-btn" class="btn green">Carregar</button>
+            <button id="close-load-game-dialog" class="btn red">Não quero</button>
+        </footer>
+    </dialog>
+</body>
+<script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+</html>

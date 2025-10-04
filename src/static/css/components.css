@@ -1,0 +1,73 @@
+.btn {
+    cursor: pointer;
+    font-size: 2.5rem;
+    margin: 10px;
+    padding: 10px;
+    border: 3px solid white;
+    border-radius: 5px;
+    box-shadow: 3px 5px 0 0 black;
+    color: white;
+    translate: 0 0;
+    transition: box-shadow .1s, translate .1s;
+}
+
+.btn:active {
+    box-shadow: 0 0 0 0 black;
+    translate: 0 5px;
+}
+
+.special-btn {
+    cursor: pointer;
+    font-size: 4rem;
+    margin: 5px;
+    padding: 5px;
+    color: white;
+    background: none;
+    border: none;
+    transition: scale .1s;
+}
+
+.special-btn:hover {
+    scale: 1.35;
+}
+
+.special-btn:active {
+    scale: 0.8;
+}
+
+.dialog {
+    width: 80dvw;
+    max-height: 70vh;
+    overflow: auto;
+    scrollbar-width: none;
+    font-size: 1.8rem;
+    border-radius: 5px;
+    text-align: justify;
+    color: whitesmoke;
+}
+
+.dialog-title {
+    margin: 10px 0;
+    text-decoration: underline;
+}
+
+.separator {
+    height: 3px;
+    background-color: white;
+    border: 0;
+    border-radius: 5px;
+}
+
+.inp {
+    padding: 10px;
+    border-radius: 5px;
+    border: 3px solid white;
+    box-shadow: 3px 5px 0 0 black;
+    background-color: #3a4642;
+    color: white;
+    font-size: 1.8rem;
+}
+
+.inp:focus {
+    outline: none;
+}
