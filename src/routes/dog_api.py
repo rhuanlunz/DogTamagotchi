@@ -1,7 +1,16 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, abort
+from services.uuid_validation_service import *
 from services.dog_api_service import *
 
 dog_api_blueprint = Blueprint('dog_api', __name__)
+
+@dog_api_blueprint.before_request
+def validate_game_uuid():
+    game_save = request.args.get("save")
+    try:
+        validate_game_uuid_service(game_save)
+    except Exception as e:
+        abort(400, description=str(e))
 
 @dog_api_blueprint.route("/status", methods=["GET"])
 def show_dog_status():
@@ -15,7 +24,7 @@ def show_dog_status():
 
 @dog_api_blueprint.route("/wake_up", methods=["GET"])
 def wake_up_dog():
-    game_save = request.args.get("save")  
+    game_save = request.args.get("save")
     try:
         message = wake_up_dog_service(game_save)
     except Exception as e:

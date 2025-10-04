@@ -1,36 +1,35 @@
-from infrastructure.database import update_dog_attributes
-from services.uuid_validation_service import get_validated_game
+from infrastructure.database import update_dog_attributes, find_game_by_uuid
 from entities.dog_response import DogResponse
 from entities.dog import Dog
 
 def show_dog_status_service(game_uuid: str | None) -> DogResponse:
-    game = get_validated_game(game_uuid)
+    game = find_game_by_uuid(game_uuid)
     response = __serialize_response_from_db(game)
     return response
 
 def wake_up_dog_service(game_uuid: str | None) -> str:
-    game = get_validated_game(game_uuid)
+    game = find_game_by_uuid(game_uuid)
     dog = __serialize_dog_from_db(game)
     dog.wake_up()
     update_dog_attributes(game_uuid=game[0], dog=dog)
     return f"{dog.name} waked up!"
 
 def feed_dog_service(game_uuid: str | None) -> str:
-    game = get_validated_game(game_uuid)
+    game = find_game_by_uuid(game_uuid)
     dog = __serialize_dog_from_db(game)
     dog.feed()
     update_dog_attributes(game_uuid=game[0], dog=dog)
     return f"{dog.name} received food!"
 
 def play_with_dog_service(game_uuid: str | None) -> str:
-    game = get_validated_game(game_uuid)
+    game = find_game_by_uuid(game_uuid)
     dog = __serialize_dog_from_db(game)
     dog.play()
     update_dog_attributes(game_uuid=game[0], dog=dog)
     return f"{dog.name} played!"
 
 def sleep_dog_service(game_uuid: str | None) -> str:
-    game = get_validated_game(game_uuid)
+    game = find_game_by_uuid(game_uuid)
     dog = __serialize_dog_from_db(game)
     dog.sleep()
     update_dog_attributes(game_uuid=game[0], dog=dog)
