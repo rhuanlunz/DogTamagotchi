@@ -37,7 +37,7 @@ def update_dog_attributes(game_uuid: str, dog: Dog):
             WHERE uuid = ?""", (*dog.get_status(), game_uuid))
         connection.commit()
 
-def find_game_by_uuid(game_uuid: str):
+def find_game_by_uuid(game_uuid: str | None):
     with sqlite3.connect(DATABASE_PATH) as connection:
         cursor = connection.cursor()
         game = cursor.execute("SELECT * FROM games WHERE uuid = ?", (game_uuid,)).fetchone()

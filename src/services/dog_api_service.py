@@ -1,61 +1,40 @@
-from infrastructure.database import find_game_by_uuid, update_dog_attributes
+from infrastructure.database import update_dog_attributes
+from services.uuid_validation_service import get_validated_game
 from entities.dog_response import DogResponse
 from entities.dog import Dog
-from uuid import UUID
 
 def show_dog_status_service(game_uuid: str | None) -> DogResponse:
-    game = __get_validated_game(game_uuid)
+    game = get_validated_game(game_uuid)
     response = __serialize_response_from_db(game)
     return response
 
 def wake_up_dog_service(game_uuid: str | None) -> str:
-    game = __get_validated_game(game_uuid)
+    game = get_validated_game(game_uuid)
     dog = __serialize_dog_from_db(game)
     dog.wake_up()
     update_dog_attributes(game_uuid=game[0], dog=dog)
     return f"{dog.name} waked up!"
 
 def feed_dog_service(game_uuid: str | None) -> str:
-    game = __get_validated_game(game_uuid)
+    game = get_validated_game(game_uuid)
     dog = __serialize_dog_from_db(game)
     dog.feed()
     update_dog_attributes(game_uuid=game[0], dog=dog)
     return f"{dog.name} received food!"
 
 def play_with_dog_service(game_uuid: str | None) -> str:
-    game = __get_validated_game(game_uuid)
+    game = get_validated_game(game_uuid)
     dog = __serialize_dog_from_db(game)
     dog.play()
     update_dog_attributes(game_uuid=game[0], dog=dog)
     return f"{dog.name} played!"
 
 def sleep_dog_service(game_uuid: str | None) -> str:
-    game = __get_validated_game(game_uuid)
+    game = get_validated_game(game_uuid)
     dog = __serialize_dog_from_db(game)
     dog.sleep()
     update_dog_attributes(game_uuid=game[0], dog=dog)
     return f"{dog.name} is sleeping..."
-
-def __get_validated_game(game_uuid: str | None):
-    if not game_uuid:
-        raise Exception("Game UUID parameter is none")
-
-    if not __is_valid_uuid_format(game_uuid):
-        raise Exception("Game UUID is not valid")
-    
-    game = find_game_by_uuid(game_uuid)
-    if game is None:
-        raise Exception("Inexistent game")
-    
-    return game
-
-def __is_valid_uuid_format(uuid: str) -> bool:
-    try:
-        UUID(uuid)
-    except ValueError:
-        return False
-    
-    return True
 
 def __serialize_response_from_db(database_game_data: tuple[str, str, str, int, int, bool, bool]) -> DogResponse:
     response: DogResponse = {

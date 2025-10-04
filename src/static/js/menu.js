@@ -9,7 +9,10 @@ function fadeOutElement(element) {
 }
 
 // Create new game button
-$("#new-game-btn").click(() => window.location = 'create_new_game');
+$("#new-game-btn").click(() => {
+    $.get("create_new_game")
+        .done((data) => window.location = data.redirect_url);
+});
 
 // Load game button
 $("#send-game-uuid-btn").click(() => {
@@ -17,7 +20,7 @@ $("#send-game-uuid-btn").click(() => {
     
     $.get("load_existing_game", { game:  gameUuid})
         .done((data) => {
-            window.location = data.redirect_url
+            window.location = data.redirect_url;
         })
         .fail(() => {
             const inputError = "#input-error";
