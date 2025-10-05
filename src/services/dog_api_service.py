@@ -35,18 +35,19 @@ def sleep_dog_service(game_uuid: str | None) -> str:
     update_dog_attributes(game_uuid=game[0], dog=dog)
     return f"{dog.name} is sleeping..."
 
-def __serialize_response_from_db(database_game_data: tuple[str, str, str, int, int, bool, bool]) -> DogResponse:
+def __serialize_response_from_db(database_game_data: tuple[str, str, str, int, int, bool, bool, str]) -> DogResponse:
     response: DogResponse = {
         "dog_name": database_game_data[1],
         "dog_bread": database_game_data[2],
         "dog_hunger": database_game_data[3],
         "dog_fatigue": database_game_data[4],
         "dog_is_sleeping": database_game_data[5],
-        "dog_is_dead": database_game_data[6]
+        "dog_is_dead": database_game_data[6],
+        "dog_warning": database_game_data[7]
     }
     return response
 
-def __serialize_dog_from_db(database_game_data: tuple[str, str, str, int, int, bool, bool]) -> Dog:
+def __serialize_dog_from_db(database_game_data: tuple[str, str, str, int, int, bool, bool, str]) -> Dog:
     dog = Dog(
         name=database_game_data[1], 
         breed=database_game_data[2], 

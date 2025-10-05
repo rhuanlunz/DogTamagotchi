@@ -7,3 +7,4 @@ class DogResponse(TypedDict):
     dog_fatigue: int
     dog_is_sleeping: bool
     dog_is_dead: bool
+    dog_warning: str

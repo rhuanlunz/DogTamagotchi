@@ -6,8 +6,18 @@ class Dog:
         self.fatigue = fatigue
         self.sleeping = sleeping
         self.dead = dead
+        self.warning_message = ""
         self.MAX_HUNGER = 6
         self.MAX_FATIGUE = 5
+
+    def get_status(self):
+        return (self.name, 
+                self.breed, 
+                self.hunger, 
+                self.fatigue,
+                self.sleeping, 
+                self.dead, 
+                self.warning_message)
 
     def wake_up(self) -> None:
         if not self.__is_sleeping():
@@ -42,16 +52,13 @@ class Dog:
             self.__die()
             return
         elif self.hunger == self.MAX_HUNGER - 1:
-            print(f"{self.name} may die soon...")
+            self.warning_message = f"{self.name} may die soon..."
         
         self.fatigue += 1
         if self.fatigue == self.MAX_FATIGUE:
             self.sleep()
             return
-
-    def get_status(self) -> tuple[str, str, int, int, bool, bool]:
-        return (self.name, self.breed, self.hunger, self.fatigue, self.sleeping, self.dead)
-    
+ 
     def sleep(self) -> None:
         if self.fatigue < self.MAX_FATIGUE - 3:
             raise Exception(f"{self.name} doesn't need to sleep.")
@@ -62,6 +69,7 @@ class Dog:
         if not self.__is_alive():
             raise Exception(f"{self.name} is already sleeping. For ever...")
 
+        self.warning_message = f"{self.name} fell asleep"
         self.sleeping = True
         self.fatigue = 0
 
@@ -72,5 +80,6 @@ class Dog:
         return not self.dead
 
     def __die(self) -> None:
+        self.warning_message = f"{self.name} died..."
         self.dead = True
-        print(f"{self.name} died...")
+        
