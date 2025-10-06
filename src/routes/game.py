@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, render_template
 from infrastructure.database import is_game_exist
 
 game_blueprint = Blueprint("game", __name__)
@@ -12,4 +12,4 @@ def render_game():
     if not is_game_exist(game_save):
         return "Inexistent game", 404
 
-    return "render game"
+    return render_template("game.html")

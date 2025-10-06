@@ -8,9 +8,15 @@ menu_blueprint = Blueprint("menu", __name__)
 def render_menu():
     return render_template("menu.html")
 
-@menu_blueprint.route("/create_new_game", methods=["GET"])
+@menu_blueprint.route("/create_new_game", methods=["POST"])
 def create_new_game():
-    valid_game_uuid = create_new_game_service()
+    request_data = request.get_json()
+    print(request_data)
+    try:
+        valid_game_uuid = create_new_game_service(request_data)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
     return jsonify({"redirect_url": url_for("game.render_game", save=valid_game_uuid)})
 
 @menu_blueprint.route("/load_existing_game", methods=["GET"])

@@ -1,12 +1,14 @@
+@import url('colors.css');
+
 .btn {
     cursor: pointer;
     font-size: 2.5rem;
     margin: 10px;
     padding: 10px;
-    border: 3px solid white;
+    border: 3px solid var(--text);
     border-radius: 5px;
     box-shadow: 3px 5px 0 0 black;
-    color: white;
+    color: var(--text);
     translate: 0 0;
     transition: box-shadow .1s, translate .1s;
 }
@@ -21,7 +23,7 @@
     font-size: 4rem;
     margin: 5px;
     padding: 5px;
-    color: white;
+    color: var(--text);
     background: none;
     border: none;
     transition: scale .1s;
@@ -43,7 +45,8 @@
     font-size: 1.8rem;
     border-radius: 5px;
     text-align: justify;
-    color: whitesmoke;
+    background-color: var(--fg);
+    color: var(--text);
 }
 
 .dialog-title {
@@ -51,9 +54,14 @@
     text-decoration: underline;
 }
 
+.dialog-footer {
+    display: flex;
+    justify-content: center;
+}
+
 .separator {
     height: 3px;
-    background-color: white;
+    background-color: var(--text);
     border: 0;
     border-radius: 5px;
 }
@@ -61,13 +69,18 @@
 .inp {
     padding: 10px;
     border-radius: 5px;
-    border: 3px solid white;
+    border: 3px solid var(--text);
     box-shadow: 3px 5px 0 0 black;
-    background-color: #3a4642;
-    color: white;
+    background-color: var(--element-fg);
+    color: var(--text);
     font-size: 1.8rem;
 }
 
 .inp:focus {
     outline: none;
+}
+
+.input-error {
+    color: var(--red);
+    text-decoration: underline;
 }

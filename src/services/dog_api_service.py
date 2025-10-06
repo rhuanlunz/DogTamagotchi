@@ -38,7 +38,7 @@ def sleep_dog_service(game_uuid: str | None) -> str:
 def __serialize_response_from_db(database_game_data: tuple[str, str, str, int, int, bool, bool, str]) -> DogResponse:
     response: DogResponse = {
         "dog_name": database_game_data[1],
-        "dog_bread": database_game_data[2],
+        "dog_breed": database_game_data[2],
         "dog_hunger": database_game_data[3],
         "dog_fatigue": database_game_data[4],
         "dog_is_sleeping": database_game_data[5],

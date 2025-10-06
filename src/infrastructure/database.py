@@ -10,7 +10,7 @@ def initialize_database():
             CREATE TABLE IF NOT EXISTS games(
                 uuid VARCHAR(36) PRIMARY KEY,
                 dog_name VARCHAR(255) NOT NULL DEFAULT '',
-                dog_bread VARCHAR(255) NOT NULL DEFAULT '',
+                dog_breed VARCHAR(255) NOT NULL DEFAULT '',
                 dog_hunger INTEGER NOT NULL DEFAULT 0,
                 dog_fatigue INTEGER NOT NULL DEFAULT 0,
                 dog_is_sleeping BOOLEAN NOT NULL DEFAULT TRUE,
@@ -18,10 +18,10 @@ def initialize_database():
                 dog_warning VARCHAR(255) NOT NULL DEFAULT '')""")
         connection.commit()
 
-def create_game(game_uuid: str) -> None:
+def create_game(game_uuid: str, dog_name: str, dog_breed: str) -> None:
     with sqlite3.connect(DATABASE_PATH) as connection:
         cursor = connection.cursor()
-        cursor.execute("INSERT INTO games(uuid) VALUES(?)", (game_uuid,))
+        cursor.execute("INSERT INTO games(uuid, dog_name, dog_breed) VALUES(?, ?, ?)", (game_uuid, dog_name, dog_breed,))
         connection.commit()
 
 def update_dog_attributes(game_uuid: str, dog: Dog):
@@ -30,7 +30,7 @@ def update_dog_attributes(game_uuid: str, dog: Dog):
         cursor.execute("""
             UPDATE games SET 
                 dog_name = ?,
-                dog_bread = ?,
+                dog_breed = ?,
                 dog_hunger = ?,
                 dog_fatigue = ?,
                 dog_is_sleeping = ?,

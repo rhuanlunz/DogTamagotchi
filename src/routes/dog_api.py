@@ -1,22 +1,22 @@
-from flask import Blueprint, request, jsonify, abort
+from flask import Blueprint, request, jsonify, abort, g
 from services.uuid_validation_service import *
 from services.dog_api_service import *
 
 dog_api_blueprint = Blueprint('dog_api', __name__)
 
 @dog_api_blueprint.before_request
-def validate_game_uuid():
+def validate_game_uuid_middleware():
     game_save = request.args.get("save")
     try:
         validate_game_uuid_service(game_save)
+        g.game_save = game_save
     except Exception as e:
         abort(400, description=str(e))
 
 @dog_api_blueprint.route("/status", methods=["GET"])
 def show_dog_status():
-    game_save = request.args.get("save")
     try:
-        response = show_dog_status_service(game_save)
+        response = show_dog_status_service(g.game_save)
     except Exception as e:
         return jsonify(str(e)), 400
     
@@ -24,9 +24,8 @@ def show_dog_status():
 
 @dog_api_blueprint.route("/wake_up", methods=["GET"])
 def wake_up_dog():
-    game_save = request.args.get("save")
     try:
-        message = wake_up_dog_service(game_save)
+        message = wake_up_dog_service(g.game_save)
     except Exception as e:
         return jsonify({"message": str(e)}), 400
     
@@ -34,9 +33,8 @@ def wake_up_dog():
 
 @dog_api_blueprint.route("/feed", methods=["GET"])
 def feed_dog():
-    game_save = request.args.get("save")
     try:
-        message = feed_dog_service(game_save)
+        message = feed_dog_service(g.game_save)
     except Exception as e:
         return jsonify({"message": str(e)}), 400
 
@@ -44,9 +42,8 @@ def feed_dog():
 
 @dog_api_blueprint.route("/play", methods=["GET"])
 def play_with_dog():
-    game_save = request.args.get("save")
     try:
-        message = play_with_dog_service(game_save)
+        message = play_with_dog_service(g.game_save)
     except Exception as e:
         return jsonify({"message": str(e)}), 400
 
@@ -54,9 +51,8 @@ def play_with_dog():
 
 @dog_api_blueprint.route("/sleep", methods=["GET"])
 def sleep_dog():
-    game_save = request.args.get("save")
     try:
-        message = sleep_dog_service(game_save)
+        message = sleep_dog_service(g.game_save)
     except Exception as e:
         return jsonify({"message": str(e)}), 400
 

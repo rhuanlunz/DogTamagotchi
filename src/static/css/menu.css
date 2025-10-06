@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+@import url('colors.css');
 
 * {
     font-family: "Jersey 10", sans-serif;
@@ -12,7 +13,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: palevioletred;
+    background-color: var(--bg);
 }
 
 nav {
@@ -31,14 +32,10 @@ footer {
     text-shadow: 3px 5px 0 black;
 }
 
-#load-game-dialog > main {
+#load-game-dialog > main,
+#new-game-dialog > main > div {
     display: flex;
     flex-direction: column;
-}
-
-#input-error {
-    color: #de324c;
-    text-decoration: underline;
 }
 
 .menu-section {
@@ -51,35 +48,6 @@ footer {
     color: white;
 }
 
-.green {
-    background-color: #54e438;
-}
-
-.blue {
-    background-color: #6d9efc;
-}
-
-.red {
-    background-color: #de324c;
-}
-
-.how-to-play-dialog-color {
-    background-color: #77599d;
-}
-
-.about-dialog-color {
-    background-color: #353c31;
-}
-
-.load-game-dialog-color {
-    background-color: #6d9efc;
-}
-
 .center {
     text-align: center;
-}
-
-.dialog-footer {
-    display: flex;
-    justify-content: center;
 }
