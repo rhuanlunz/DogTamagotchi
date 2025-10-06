@@ -11,10 +11,17 @@ def create_new_game_service(request_data: DogRequest) -> str:
     
     if not dog_breed_raw:
         raise Exception("dog_breed request parameter is null")
+
+    if not dog_name_raw.replace(' ', '').isalpha():
+        raise Exception("Only letters and spaces are allowed in dog_name")
+    
+    if not dog_breed_raw.replace(' ', '').isalpha():
+        raise Exception("Only letters and spaces are allowed in dog_breed")
   
     dog_name = dog_name_raw.strip().capitalize()
     dog_breed = dog_breed_raw.strip().capitalize()
+
     game_uuid_str = str(uuid4())
+    
     create_game(game_uuid_str, dog_name, dog_breed)
     return game_uuid_str
-

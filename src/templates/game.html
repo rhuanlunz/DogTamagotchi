@@ -1,11 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pablo. - Gameplay Insana</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
+    <script src="{{ url_for('static', filename='dist/jquery-3.7.1.min.js') }}"></script>
 </head>
 <body>
-    Bom dia bbr
+    <main>
+        <header>
+            <h1 id="dog-name"></h1>
+            <picture id="dog-picture">
+                <img id="dog-image" src="{{ url_for('static', filename='assets/dog.jpg') }}" alt="Imagem de um cachorro">
+            </picture>
+            <h2 id="dog-message" hidden></h2>
+        </header>
+
+        <div id="buttons-div">
+            <button type="button" id="wake-up-btn" class="btn blue-bkg">Acordar</button>
+            <button type="button" id="sleep-btn" class="btn blue-bkg">Dormir</button>
+            <button type="button" id="feed-btn" class="btn blue-bkg">Alimentar</button>
+            <button type="button" id="play-btn" class="btn blue-bkg">Brincar</button>
+            <button type="button" id="show-status-btn" class="btn blue-bkg">Mostrar Status</button>
+        </div>
+    </main>
 </body>
+<script src="{{ url_for('static', filename='js/game.js') }}"></script>
 </html>

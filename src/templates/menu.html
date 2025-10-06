@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pablo - Menu</title>
+    <title>Pablo.</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
     <script src="{{ url_for('static', filename='dist/jquery-3.7.1.min.js') }}"></script>
 </head>
 <body>
@@ -117,9 +116,9 @@
 
         <main>
             <label for="game-uuid">Insira o identificador do jogo:</label>
-            <span id="game-uuid-input" class="input-error" hidden>Identificador inválido, seu burro</span>
+            <span id="game-uuid-input" class="input-error" hidden></span>
             
-            <input type="text" id="game-uuid" name="game-uuid" placeholder="na minha máquina funcionou..." class="inp">
+            <input type="text" id="game-uuid" name="game-uuid" placeholder="Na minha máquina funcionou..." class="inp">
         </main>
         
         <br>
@@ -140,7 +139,7 @@
 
             <div>
                 <label for="pablo-name">Insira o nome do seu Pablo.:</label>
-                <span id="name-input-error" class="input-error" hidden>Cade o nome do seu Pablo.?</span>
+                <span id="name-input-error" class="input-error" hidden></span>
                 <input type="text" id="pablo-name" name="pablo-name" placeholder="Pablo. é um ótimo nome..." class="inp">
             </div>
 
@@ -148,7 +147,7 @@
 
             <div>
                 <label for="pablo-breed">Insira a raça do seu Pablo.:</label>
-                <span id="breed-input-error" class="input-error" hidden>Teu Pablo. não tem raça?</span>
+                <span id="breed-input-error" class="input-error" hidden></span>
                 <input type="text" id="pablo-breed" name="pablo-breed" placeholder="Pablo. é uma ótima raça..." class="inp">
                 <!-- 
                 Talvez isso seja um easter-egg... Por que vc não tenta inserir??

@@ -8,8 +8,9 @@ function fadeOutElement(element) {
     $(element).fadeOut(fadeTime);
 }
 
-function showErrorMessage(errorElement) {
+function showErrorMessage(errorElement, message) {
     $(errorElement).fadeIn(fadeTime);
+    $(errorElement).text(message);
     setTimeout(() => $(errorElement).fadeOut(fadeTime), 5000);
 }
 
@@ -18,12 +19,14 @@ $("#confirm-dog-info-btn").click(() => {
     const dogName = $("#pablo-name").val();
     const dogBreed = $("#pablo-breed").val();
 
-    if (!dogName) {
-        showErrorMessage("#name-input-error");
+    if (!dogName.replaceAll(" ", "")) {
+        showErrorMessage("#name-input-error", "Cade o nome do seu Pablo.?");
+        return;
     }
 
-    if (!dogBreed) {
-        showErrorMessage("#breed-input-error");
+    if (!dogBreed.replaceAll(" ", "")) {
+        showErrorMessage("#breed-input-error", "Teu Pablo. não tem raça?");
+        return;
     }
     
     $.post({
@@ -46,13 +49,18 @@ $("#confirm-dog-info-btn").click(() => {
 // Load game button
 $("#send-game-uuid-btn").click(() => {
     gameUuid = $("#game-uuid").val();
+
+    if (!gameUuid) {
+        showErrorMessage("#game-uuid-input", "Cade o identificador?");
+        return;
+    }
     
     $.get("load_existing_game", { game:  gameUuid})
         .done((data) => {
             window.location = data.redirect_url;
         })
         .fail(() => {
-            showErrorMessage("#game-uuid-input");
+            showErrorMessage("#game-uuid-input", "Identificador inválido, burro");
         });
 });
 
