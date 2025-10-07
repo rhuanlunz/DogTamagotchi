@@ -1,7 +1,7 @@
 class Dog:
     def __init__(self, name: str, breed: str, hunger: int = 0, fatigue: int = 0, sleeping: bool = True, dead: bool = False) -> None:
         self.name = name.strip().capitalize()
-        self.breed = breed.strip().lower()
+        self.breed = breed.strip().capitalize()
         self.hunger = hunger
         self.fatigue = fatigue
         self.sleeping = sleeping
