@@ -1,6 +1,6 @@
 from infrastructure.database import update_dog_attributes, find_game_by_uuid
-from entities.dog_response import DogResponse
-from entities.dog import Dog
+from domain.entities.dog_response import DogResponse
+from domain.entities.dog import Dog
 
 def show_dog_status_service(game_uuid: str | None) -> DogResponse:
     game = find_game_by_uuid(game_uuid)

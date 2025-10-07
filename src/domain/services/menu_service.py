@@ -1,4 +1,4 @@
-from entities.dog_request import DogRequest
+from domain.entities.dog_request import DogRequest
 from infrastructure.database import create_game
 from uuid import uuid4
 

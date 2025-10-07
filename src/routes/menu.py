@@ -1,6 +1,7 @@
 from flask import Blueprint, request, url_for, render_template, jsonify
-from services.uuid_validation_service import validate_game_uuid_service
-from services.menu_service import *
+from limiter_config import limiter
+from domain.services.uuid_validation_service import validate_game_uuid_service
+from domain.services.menu_service import *
 
 menu_blueprint = Blueprint("menu", __name__)
 
@@ -9,6 +10,7 @@ def render_menu():
     return render_template("menu.html")
 
 @menu_blueprint.route("/create_new_game", methods=["POST"])
+@limiter.limit("5/minute")
 def create_new_game():
     request_data = request.get_json()
     try:
