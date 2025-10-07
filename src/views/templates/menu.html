@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pablo.</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/favicon/favicon.ico')}}" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
     <script src="{{ url_for('static', filename='dist/jquery-3.7.1.min.js') }}"></script>
 </head>
@@ -11,6 +12,7 @@
     <section class="menu-section">
         <header class="menu-header">
             <h1 id="header-title"> ~ Pablo. ~</h1>
+            <p id="splash-text"></p>
         </header>
         <nav>
             <button id="new-game-btn" class="btn green-bkg" type="button">Novo Jogo</button>
@@ -108,25 +110,27 @@
     </dialog>
 
     <dialog id="load-game-dialog" class="dialog">
-        <header class="dialog-header">
-            <h1 class="dialog-title center">Carregar Jogo</h1>
-        </header>
-        
-        <hr class="separator">
-
         <main>
-            <label for="game-uuid">Insira o identificador do jogo:</label>
-            <span id="game-uuid-input" class="input-error" hidden></span>
+            <header class="dialog-header">
+                <h1 class="dialog-title center">Carregar Jogo</h1>
+            </header>
             
-            <input type="text" id="game-uuid" name="game-uuid" placeholder="Na minha máquina funcionou..." class="inp">
-        </main>
-        
-        <br>
+            <hr class="separator">
 
-        <footer class="dialog-footer">
-            <button id="send-game-uuid-btn" class="btn green-bkg">Carregar</button>
-            <button id="close-load-game-dialog" class="btn red-bkg">Não quero</button>
-        </footer>
+            <section>
+                <label for="game-uuid">Insira o identificador do jogo:</label>
+                <input type="text" id="game-uuid" name="game-uuid" placeholder="Na minha máquina funcionou..." class="inp">
+            </section>
+
+            <section>
+                <span id="game-uuid-input-error" class="input-error" hidden></span>
+            </section>
+            
+            <footer class="dialog-footer">
+                <button id="send-game-uuid-btn" class="btn green-bkg">Carregar</button>
+                <button id="close-load-game-dialog" class="btn red-bkg">Não quero</button>
+            </footer>
+        </main>
     </dialog>
 
     <dialog id="new-game-dialog" class="dialog">
@@ -137,37 +141,31 @@
 
             <hr class="separator">
 
-            <div>
+            <section>
                 <label for="pablo-name">Insira o nome do seu Pablo.:</label>
-                <span id="name-input-error" class="input-error" hidden></span>
                 <input type="text" id="pablo-name" name="pablo-name" placeholder="Pablo. é um ótimo nome..." class="inp">
-            </div>
+            </section>
 
             <br>
 
-            <div>
+            <section>
                 <label for="pablo-breed">Insira a raça do seu Pablo.:</label>
-                <span id="breed-input-error" class="input-error" hidden></span>
                 <input type="text" id="pablo-breed" name="pablo-breed" placeholder="Pablo. é uma ótima raça..." class="inp">
-                <!-- 
-                Talvez isso seja um easter-egg... Por que vc não tenta inserir??
-
-                <option selected value="Pablo.">O mais pika</option>
-                <option value="Cherry">do Francês não do Inglês</option>
-                <option value="Pinscher Lara">Obesa</option>
-                <option value="Pinscher Neguita">Magrela</option>
-                <option value="Shih Tzu Romeo">Vem com problemas</option> 
-                -->
-            </div>
+            </section>
+            
+            <section>
+                <span id="input-error" class="input-error" hidden></span>
+            </section>
         </main>
-
-        <br>
-
+        
         <footer>
             <button id="confirm-dog-info-btn" class="btn green-bkg">Chama</button>
             <button id="close-new-game-dialog" class="btn red-bkg">Vô não</button>
         </footer>
     </dialog>
+
+    <audio loop autoplay id="menu-music" src="{{ url_for('static', filename='assets/audios/musics/menu.mp3') }}" type="audio/mp3"></audio>
+    <audio autoplay id="pablo-sound-effect" src="{{ url_for('static', filename='assets/audios/sound_effects/pablo.mp3') }}" type="audio/mp3"></audio>
 </body>
 <script src="{{ url_for('static', filename='js/menu.js') }}"></script>
 </html>

@@ -29,26 +29,55 @@ footer {
 }
 
 #header-title {
-    margin: 10px;
+    margin: 0;
     text-shadow: 3px 5px 0 black;
 }
 
-#load-game-dialog > main,
-#new-game-dialog > main > div {
+#splash-text {
+    margin: 0;
+    color: yellow;
+    font-size: 1.7rem;
+    text-shadow: 2px 3px 0 black;
+    animation-name: splashAnimation;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+#load-game-dialog > main > section,
+#new-game-dialog > main > section {
     display: flex;
     flex-direction: column;
 }
 
+#input-error,
+#game-uuid-input-error {
+    text-align: center;
+    padding: 10px 0;
+}
+
 .menu-section {
     text-align: center;
-    padding: 40px;
+    padding: 20px;
 }
 
 .menu-header {
     font-size: 2.3rem;
     color: white;
+    margin-bottom: 20px;
 }
 
 .center {
     text-align: center;
+}
+
+@keyframes splashAnimation {
+    0% {
+        scale: 1;
+    }
+    50% {
+        scale: 0.95;
+    }
+    100% {
+        scale: 1;
+    }
 }

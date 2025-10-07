@@ -1,4 +1,29 @@
 const fadeTime = 300;
+const menuMusicElement = $("#menu-music");
+const pabloSoundElement = $("#pablo-sound-effect");
+const dogNameElement = $("#pablo-name");
+const dogBreedElement = $("#pablo-breed");
+const gameUUIDElement = $("#game-uuid");
+const splashTextElement = $("#splash-text");
+const splashTexts = [
+    "É do caralho!",
+    "O melhor!",
+    "Brabo!",
+    "Lucas Samuel Santos!",
+    "não grita.",
+    "Pablo.",
+    "Red Pill Based",
+    "Eu não lhe tanko",
+    "Vapo.",
+    "ReCeBa!!!",
+    "amém.",
+    "Diga não ao XSS!",
+    "SQL Injection é paia",
+    "DoS + DDoS = perdemo",
+    "Dá não, man",
+    "S2",
+    "Bola vermelha = models"
+]
 
 function fadeInElement(element) {
     $(element).fadeIn(fadeTime);
@@ -9,23 +34,34 @@ function fadeOutElement(element) {
 }
 
 function showErrorMessage(errorElement, message) {
-    $(errorElement).fadeIn(fadeTime);
+    $(errorElement).stop(true, true);
+    
     $(errorElement).text(message);
+    $(errorElement).fadeIn(fadeTime);
+
     setTimeout(() => $(errorElement).fadeOut(fadeTime), 5000);
 }
 
+$(window).ready(() => {
+    const text = splashTexts[Math.floor(Math.random() * splashTexts.length)];
+    splashTextElement.text(text);
+
+    menuMusicElement[0].play();
+    pabloSoundElement[0].play();
+});
+
 // Create new game button
 $("#confirm-dog-info-btn").click(() => {
-    const dogName = $("#pablo-name").val();
-    const dogBreed = $("#pablo-breed").val();
+    const dogName = dogNameElement.val();
+    const dogBreed = dogBreedElement.val();
 
     if (!dogName.replaceAll(" ", "")) {
-        showErrorMessage("#name-input-error", "Cade o nome do seu Pablo.?");
+        showErrorMessage("#input-error", "Erro: Cade o nome do seu Pablo.?");
         return;
     }
 
     if (!dogBreed.replaceAll(" ", "")) {
-        showErrorMessage("#breed-input-error", "Teu Pablo. não tem raça?");
+        showErrorMessage("#input-error", "Erro: Teu Pablo. não tem raça?");
         return;
     }
     
@@ -40,18 +76,18 @@ $("#confirm-dog-info-btn").click(() => {
         success: (data) => {
             window.location = data.redirect_url;
         },
-        error: (xhr, status, error) => {
-            console.error("Error: ", status, error, xhr.reponseJSON);
+        error: (xhr) => {
+            showErrorMessage("#input-error", "Erro: " + xhr.responseJSON.error);
         }
     });
 });
 
 // Load game button
 $("#send-game-uuid-btn").click(() => {
-    gameUuid = $("#game-uuid").val();
+    gameUuid = gameUUIDElement.val();
 
     if (!gameUuid) {
-        showErrorMessage("#game-uuid-input", "Cade o identificador?");
+        showErrorMessage("#game-uuid-input-error", "Cade o identificador?");
         return;
     }
     
@@ -59,16 +95,24 @@ $("#send-game-uuid-btn").click(() => {
         .done((data) => {
             window.location = data.redirect_url;
         })
-        .fail(() => {
-            showErrorMessage("#game-uuid-input", "Identificador inválido, burro");
+        .fail((xhr) => {
+            showErrorMessage("#game-uuid-input-error", xhr.responseJSON.error);
+            gameUUIDElement.val("");
         });
 });
 
 // Open dialog boxes
 $("#how-to-play-btn").click(() => fadeInElement("#how-to-play-dialog"));
 $("#about-btn").click(() => fadeInElement("#about-dialog"));
-$("#load-game-btn").click(() => fadeInElement("#load-game-dialog"));
-$("#new-game-btn").click(() => fadeInElement("#new-game-dialog"));
+$("#load-game-btn").click(() => {
+    fadeInElement("#load-game-dialog");
+    gameUUIDElement.val("");
+});
+$("#new-game-btn").click(() => {
+    fadeInElement("#new-game-dialog");
+    dogNameElement.val("");
+    dogBreedElement.val("");
+});
 
 // Closes dialog boxes
 $("#close-how-to-play-dialog").click(() => fadeOutElement("#how-to-play-dialog"));

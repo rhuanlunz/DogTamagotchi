@@ -1,12 +1,10 @@
-<!-- https://www.youtube.com/watch?v=cwyTleTL06Y  meow - lvusm -->
-<!-- https://www.youtube.com/watch?v=55BgZ1IORxw [ROBLOX] Jeff Syndicate - Hip Hop 1 -->
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pablo. - Gameplay Insana</title>
+    <title>Gameplay Insana</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/favicon/favicon.ico')}}" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
     <script src="{{ url_for('static', filename='dist/jquery-3.7.1.min.js') }}"></script>
 </head>
@@ -15,8 +13,9 @@
         <div id="dog-info-div">
             <div>
                 <h1 id="dog-name"></h1>
+                <h1 id="dog-breed"></h1>
                 <picture id="dog-picture">
-                    <img id="dog-image" src="{{ url_for('static', filename='assets/dog.jpg') }}" alt="Imagem de um cachorro">
+                    <img id="dog-image" src="{{ url_for('static', filename='assets/images/a_a_folou.jpg') }}" alt="Imagem de um cachorro">
                 </picture>
                 <br>
                 <h2 id="dog-message" hidden></h2>
@@ -38,6 +37,13 @@
             <button type="button" id="next-action-btn" class="btn orange-bkg">-></button>
         </div>
     </main>
+
+    <audio loop autoplay src="{{ url_for('static', filename='assets/audios/musics/game.mp3') }}" type="audio/mp3"></audio>
+    
+    <audio id="eat-sound-effect" preload="auto" src="{{ url_for('static', filename='assets/audios/sound_effects/pou_eating.mp3') }}" type="audio/mp3"></audio>
+    <audio id="nah-sound-effect" preload="auto" src="{{ url_for('static', filename='assets/audios/sound_effects/pou_nah.mp3') }}" type="audio/mp3"></audio>
+    <audio id="sleep-sound-effect" loop preload="auto" src="{{ url_for('static', filename='assets/audios/sound_effects/dog_sleeping_meme.mp3') }}" type="audio/mp3"></audio>
+    <audio id="yawning-sound-effect" preload="auto" src="{{ url_for('static', filename='assets/audios/sound_effects/yawning_sound.mp3') }}" type="audio/mp3"></audio>
 </body>
 <script src="{{ url_for('static', filename='js/game.js') }}"></script>
 </html>

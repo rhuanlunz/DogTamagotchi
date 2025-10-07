@@ -27,7 +27,7 @@ picture,
 
 #dog-info-div {
     background-color: var(--fg);
-    padding: 10px 39px;
+    padding: 10px 40px;
     border: 3px solid white;
     border-radius: 5px;
     box-shadow: 3px 5px 0 black;
@@ -36,7 +36,7 @@ picture,
     animation-name: dogPictureAnimation;
     animation-duration: 5s;
     animation-iteration-count: infinite;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
 
 #buttons-div {
@@ -57,8 +57,10 @@ picture,
 }
 
 #dog-name,
+#dog-breed,
 #dog-message {
     text-align: center;
+    font-size: 1.8rem;
     margin: 3px;
     color: var(--text);
     text-shadow: 1px 2px 0 black;
@@ -69,14 +71,6 @@ picture,
     text-align: center;
     font-size: 1.8rem;
     text-shadow: 1px 2px 0 black;
-}
-
-#dog-name {
-    font-size: 2.5rem;
-}
-
-#dog-message {
-    font-size: 2rem;
 }
 
 #dog-hungry,

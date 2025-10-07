@@ -1,15 +1,14 @@
 from flask import Blueprint, request, render_template
-from infrastructure.database import is_game_exist
+from domain.services.uuid_validation_service import validate_game_uuid_service
 
 game_blueprint = Blueprint("game", __name__)
 
 @game_blueprint.route("/gameplay", methods=["GET"])
 def render_game():
     game_save = request.args.get("save")
-    if game_save is None:
-        return "Save parameter is none", 400
-
-    if not is_game_exist(game_save):
-        return "Inexistent game", 404
+    try:
+        validate_game_uuid_service(game_save)
+    except Exception as e:
+        return str(e)
 
     return render_template("game.html")
