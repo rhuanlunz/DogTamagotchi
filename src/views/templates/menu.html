@@ -170,5 +170,8 @@
     <audio loop autoplay id="menu-music" src="{{ url_for('static', filename='assets/audios/musics/menu.mp3') }}" type="audio/mp3"></audio>
     <audio autoplay id="pablo-sound-effect" src="{{ url_for('static', filename='assets/audios/sound_effects/pablo.mp3') }}" type="audio/mp3"></audio>
 </body>
-<script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+<script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+<script src="{{ url_for('static', filename='js/menu/menuElements.js') }}"></script>
+<script src="{{ url_for('static', filename='js/menu/configureMenuButtons.js') }}"></script>
+<script src="{{ url_for('static', filename='js/menu/menu.js') }}"></script>
 </html>
