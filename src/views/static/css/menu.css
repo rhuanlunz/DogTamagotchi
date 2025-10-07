@@ -55,6 +55,17 @@ footer {
     padding: 10px 0;
 }
 
+#qr-div {
+    display: flex;
+    justify-content: center;
+}
+
+#qr-code {
+    border-radius: 10px;
+    width: 200px;
+    height: 200px;
+}
+
 .menu-section {
     text-align: center;
     padding: 20px;
