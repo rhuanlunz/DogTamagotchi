@@ -11,7 +11,6 @@ def render_menu():
 @menu_blueprint.route("/create_new_game", methods=["POST"])
 def create_new_game():
     request_data = request.get_json()
-    print(request_data)
     try:
         valid_game_uuid = create_new_game_service(request_data)
     except Exception as e:

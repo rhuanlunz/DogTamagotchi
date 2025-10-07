@@ -5,6 +5,7 @@
     --red: #de324c;
     --green: #54e438;
     --blue: #6d9efc;
+    --orange: #d97d55;
     --text: #f5f5f5;
 }
 
@@ -20,6 +21,10 @@
     color: #6d9efc;
 }
 
+.orange {
+    color: #d97d55;
+}
+
 .red-bkg {
     background-color: #de324c;
 }
@@ -30,5 +35,9 @@
 
 .blue-bkg {
     background-color: #6d9efc;
+}
+
+.orange-bkg {
+    background-color: #d97d55;
 }
 

@@ -1,3 +1,6 @@
+<!-- https://www.youtube.com/watch?v=cwyTleTL06Y  meow - lvusm -->
+<!-- https://www.youtube.com/watch?v=55BgZ1IORxw [ROBLOX] Jeff Syndicate - Hip Hop 1 -->
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -9,20 +12,30 @@
 </head>
 <body>
     <main>
-        <header>
-            <h1 id="dog-name"></h1>
-            <picture id="dog-picture">
-                <img id="dog-image" src="{{ url_for('static', filename='assets/dog.jpg') }}" alt="Imagem de um cachorro">
-            </picture>
-            <h2 id="dog-message" hidden></h2>
-        </header>
+        <div id="dog-info-div">
+            <div>
+                <h1 id="dog-name"></h1>
+                <picture id="dog-picture">
+                    <img id="dog-image" src="{{ url_for('static', filename='assets/dog.jpg') }}" alt="Imagem de um cachorro">
+                </picture>
+                <br>
+                <h2 id="dog-message" hidden></h2>
+            </div>
+
+            <hr class="separator">
+
+            <div id="dog-status-div">
+                <p id="dog-hungry">Fome: 0/6</p>
+                <p id="dog-fatigue">Cansaço: 0/5</p>
+                <p id="dog-sleeping">Está dormindo.</p>
+                <p id="dog-warning"></p>
+            </div>
+        </div>
 
         <div id="buttons-div">
-            <button type="button" id="wake-up-btn" class="btn blue-bkg">Acordar</button>
-            <button type="button" id="sleep-btn" class="btn blue-bkg">Dormir</button>
-            <button type="button" id="feed-btn" class="btn blue-bkg">Alimentar</button>
-            <button type="button" id="play-btn" class="btn blue-bkg">Brincar</button>
-            <button type="button" id="show-status-btn" class="btn blue-bkg">Mostrar Status</button>
+            <button type="button" id="previous-action-btn" class="btn orange-bkg"><-</button>
+            <button type="button" id="action-btn" class="btn blue-bkg"></button>
+            <button type="button" id="next-action-btn" class="btn orange-bkg">-></button>
         </div>
     </main>
 </body>

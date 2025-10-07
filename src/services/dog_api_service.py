@@ -12,28 +12,28 @@ def wake_up_dog_service(game_uuid: str | None) -> str:
     dog = __serialize_dog_from_db(game)
     dog.wake_up()
     update_dog_attributes(game_uuid=game[0], dog=dog)
-    return f"{dog.name} waked up!"
+    return f"{dog.name} acordou!"
 
 def feed_dog_service(game_uuid: str | None) -> str:
     game = find_game_by_uuid(game_uuid)
     dog = __serialize_dog_from_db(game)
     dog.feed()
     update_dog_attributes(game_uuid=game[0], dog=dog)
-    return f"{dog.name} received food!"
+    return f"{dog.name} foi alimentado!"
 
 def play_with_dog_service(game_uuid: str | None) -> str:
     game = find_game_by_uuid(game_uuid)
     dog = __serialize_dog_from_db(game)
     dog.play()
     update_dog_attributes(game_uuid=game[0], dog=dog)
-    return f"{dog.name} played!"
+    return f"{dog.name} jogou GTA 6!"
 
 def sleep_dog_service(game_uuid: str | None) -> str:
     game = find_game_by_uuid(game_uuid)
     dog = __serialize_dog_from_db(game)
     dog.sleep()
     update_dog_attributes(game_uuid=game[0], dog=dog)
-    return f"{dog.name} is sleeping..."
+    return f"{dog.name} cortou no sono..."
 
 def __serialize_response_from_db(database_game_data: tuple[str, str, str, int, int, bool, bool, str]) -> DogResponse:
     response: DogResponse = {

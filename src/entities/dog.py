@@ -11,6 +11,9 @@ class Dog:
         self.MAX_FATIGUE = 5
 
     def get_status(self):
+        if self.hunger == self.MAX_HUNGER - 1:
+            self.warning_message = f"{self.name} pode morrer em breve..."
+
         return (self.name, 
                 self.breed, 
                 self.hunger, 
@@ -20,56 +23,52 @@ class Dog:
                 self.warning_message)
 
     def wake_up(self) -> None:
-        if not self.__is_sleeping():
-            raise Exception(f"{self.name} is already awake.")
-        
         if not self.__is_alive():
-            raise Exception(f"{self.name} cannot wake up, he died...")
+            raise Exception(f"{self.name} tá morto...")
+        
+        if not self.__is_sleeping():
+            raise Exception(f"{self.name} já tá acordado.")
         
         self.sleeping = False
 
     def feed(self) -> None:
-        if self.__is_sleeping():
-            raise Exception(f"{self.name} cannot eat, he's sleeping.")
-        
-        if self.hunger < self.MAX_HUNGER - 4:
-            raise Exception(f"{self.name} doesn't need to eat.")
-        
         if not self.__is_alive():
-            raise Exception(f"{self.name} cannot eat, he died...")
+            raise Exception(f"{self.name} tá morto...")
         
+        if self.__is_sleeping():
+            raise Exception(f"Como que come dormindo?")
+        
+        if self.hunger == 0:
+            raise Exception(f"Quer deixar o {self.name} gordo, é?")
+                
         self.hunger = 0
 
     def play(self) -> None:
-        if self.__is_sleeping():
-            raise Exception(f"{self.name} cannot play, he's sleeping.")
-        
         if not self.__is_alive():
-            raise Exception(f"{self.name} cannot play, he died...")
+            raise Exception(f"{self.name} tá morto...")
+        
+        if self.__is_sleeping():
+            raise Exception(f"Como que brinca dormindo?")
         
         self.hunger += 1
         if self.hunger == self.MAX_HUNGER:
             self.__die()
             return
-        elif self.hunger == self.MAX_HUNGER - 1:
-            self.warning_message = f"{self.name} may die soon..."
         
         self.fatigue += 1
         if self.fatigue == self.MAX_FATIGUE:
             self.sleep()
-            return
  
     def sleep(self) -> None:
-        if self.fatigue < self.MAX_FATIGUE - 3:
-            raise Exception(f"{self.name} doesn't need to sleep.")
+        if not self.__is_alive():
+            raise Exception(f"{self.name} está dormindo, para sempre...")
 
         if self.__is_sleeping():
-            raise Exception(f"{self.name} is already sleeping.")
+            raise Exception(f"{self.name} já tá cortando no sono.")
         
-        if not self.__is_alive():
-            raise Exception(f"{self.name} is already sleeping. For ever...")
+        if self.fatigue == 0:
+            raise Exception(f"{self.name} não está cansado.")
 
-        self.warning_message = f"{self.name} fell asleep"
         self.sleeping = True
         self.fatigue = 0
 
@@ -80,6 +79,6 @@ class Dog:
         return not self.dead
 
     def __die(self) -> None:
-        self.warning_message = f"{self.name} died..."
+        self.warning_message = f"{self.name} morreu KKKKKKKKK"
         self.dead = True
         
