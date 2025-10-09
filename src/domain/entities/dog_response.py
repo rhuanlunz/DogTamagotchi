@@ -8,3 +8,4 @@ class DogResponse(TypedDict):
     dog_is_sleeping: bool
     dog_is_dead: bool
     dog_warning: str
+    dog_message: str

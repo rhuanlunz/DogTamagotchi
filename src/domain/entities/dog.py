@@ -1,84 +1,91 @@
+from domain.exceptions.is_dead_exception import IsDeadException
+from domain.exceptions.is_sleeping_exception import IsSleepingException
+from domain.exceptions.not_hungry_exception import NotHungryException
+from domain.exceptions.not_tired_exception import NotTiredException
+from domain.exceptions.already_awake_exception import AlreadyAwakeException
+
 class Dog:
-    def __init__(self, name: str, breed: str, hunger: int = 0, fatigue: int = 0, sleeping: bool = True, dead: bool = False) -> None:
+    def __init__(self, name: str, breed: str, hunger: int = 0, fatigue: int = 0, is_sleeping: bool = True, is_dead: bool = False) -> None:
         self.name = name.strip().capitalize()
         self.breed = breed.strip().capitalize()
         self.hunger = hunger
         self.fatigue = fatigue
-        self.sleeping = sleeping
-        self.dead = dead
-        self.warning_message = ""
+        self.is_sleeping = is_sleeping
+        self.is_dead = is_dead
+        self.warning = ""
+        self.message = ""
         self.MAX_HUNGER = 6
         self.MAX_FATIGUE = 5
 
     def get_status(self):
-        if self.hunger == self.MAX_HUNGER - 1:
-            self.warning_message = f"{self.name} pode morrer em breve..."
-
         return (self.name, 
                 self.breed, 
                 self.hunger, 
                 self.fatigue,
-                self.sleeping, 
-                self.dead, 
-                self.warning_message)
+                self.is_sleeping, 
+                self.is_dead, 
+                self.warning,
+                self.message)
 
     def wake_up(self) -> None:
-        if not self.__is_alive():
-            raise Exception(f"{self.name} tá morto...")
+        if self.is_dead:
+            raise IsDeadException(f"{self.name} tá morto...")
         
-        if not self.__is_sleeping():
-            raise Exception(f"{self.name} já tá acordado.")
+        if not self.is_sleeping:
+            raise AlreadyAwakeException(f"{self.name} já tá acordado.")
         
-        self.sleeping = False
+        self.is_sleeping = False
+        self.message = f"{self.name} acordou!"
 
     def feed(self) -> None:
-        if not self.__is_alive():
-            raise Exception(f"{self.name} tá morto...")
+        if self.is_dead:
+            raise IsDeadException(f"{self.name} tá morto...")
         
-        if self.__is_sleeping():
-            raise Exception(f"Como que come dormindo?")
+        if self.is_sleeping:
+            raise IsSleepingException(f"Como que come dormindo?")
         
         if self.hunger == 0:
-            raise Exception(f"Quer deixar o {self.name} gordo, é?")
-                
+            raise NotHungryException(f"Quer deixar o {self.name} gordo, é?")
+        
         self.hunger = 0
+        self.message = f"{self.name} foi alimentado!"
 
     def play(self) -> None:
-        if not self.__is_alive():
-            raise Exception(f"{self.name} tá morto...")
+        if self.is_dead:
+            raise IsDeadException(f"{self.name} tá morto...")
         
-        if self.__is_sleeping():
-            raise Exception(f"Como que brinca dormindo?")
+        if self.is_sleeping:
+            raise IsSleepingException(f"Como que brinca dormindo?")
         
         self.hunger += 1
         if self.hunger == self.MAX_HUNGER:
             self.__die()
             return
+        elif self.hunger == self.MAX_HUNGER - 1:
+            self.warning = f"{self.name} pode morrer em breve..."
         
         self.fatigue += 1
         if self.fatigue == self.MAX_FATIGUE:
             self.sleep()
+            return
+
+        self.message = f"{self.name} jogou GTA 6!"
  
     def sleep(self) -> None:
-        if not self.__is_alive():
-            raise Exception(f"{self.name} está dormindo, para sempre...")
+        if self.is_dead:
+            raise IsDeadException(f"{self.name} está dormindo, para sempre...")
 
-        if self.__is_sleeping():
-            raise Exception(f"{self.name} já tá cortando no sono.")
+        if self.is_sleeping:
+            raise IsSleepingException(f"{self.name} já tá cortando no sono.")
         
         if self.fatigue == 0:
-            raise Exception(f"{self.name} não está cansado.")
+            raise NotTiredException(f"{self.name} não está cansado.")
 
-        self.sleeping = True
+        self.is_sleeping = True
         self.fatigue = 0
-
-    def __is_sleeping(self) -> bool:
-        return self.sleeping
-    
-    def __is_alive(self) -> bool:
-        return not self.dead
+        self.message = f"{self.name} cortou no sono..."
 
     def __die(self) -> None:
-        self.warning_message = f"{self.name} morreu KKKKKKKKK"
-        self.dead = True
-        
+        self.is_dead = True
+        self.warning = ""
+        self.message = f"{self.name} morreu KKKKKKKKK"

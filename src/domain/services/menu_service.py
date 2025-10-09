@@ -1,4 +1,5 @@
 from domain.entities.dog_request import DogRequest
+from domain.exceptions.invalid_name_format_exception import InvalidNameFormatException
 from infrastructure.database import create_game
 from uuid import uuid4
 
@@ -13,11 +14,11 @@ def create_new_game_service(request_data: DogRequest) -> str:
         raise Exception("dog_breed request parameter is null")
 
     if not dog_name_raw.replace(' ', '').isalpha():
-        raise Exception("Apenas letras e espaços são permitidos no NOME do seu Pablo.")
+        raise InvalidNameFormatException("Apenas letras e espaços são permitidos no NOME do seu Pablo.")
     
     if not dog_breed_raw.replace(' ', '').isalpha():
-        raise Exception("Apenas letras e espaços são permitidos no nome da RAÇA do seu Pablo.")
-  
+        raise InvalidNameFormatException("Apenas letras e espaços são permitidos no nome da RAÇA do seu Pablo.")
+    
     dog_name = dog_name_raw.strip().capitalize()
     dog_breed = dog_breed_raw.strip().capitalize()
 

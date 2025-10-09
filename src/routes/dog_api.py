@@ -10,7 +10,8 @@ def validate_game_uuid_middleware():
     game_save = request.args.get("save")
     try:
         validate_game_uuid_service(game_save)
-        g.game_save = game_save
+        game = find_game_by_uuid(game_save)
+        g.game = game
     except Exception as e:
         abort(400, description=str(e))
 
@@ -18,7 +19,7 @@ def validate_game_uuid_middleware():
 @limiter.limit("5/second")
 def show_dog_status():
     try:
-        response = show_dog_status_service(g.game_save)
+        response = show_dog_status_service(g.game)
     except Exception as e:
         return jsonify(str(e)), 400
     
@@ -28,38 +29,38 @@ def show_dog_status():
 @limiter.limit("5/second")
 def wake_up_dog():
     try:
-        message = wake_up_dog_service(g.game_save)
+        response = wake_up_dog_service(g.game)
     except Exception as e:
         return jsonify({"message": str(e)}), 400
     
-    return jsonify({"message": message}), 200
+    return jsonify({"message": response}), 200
 
 @dog_api_blueprint.route("/feed", methods=["GET"])
 @limiter.limit("5/second")
 def feed_dog():
     try:
-        message = feed_dog_service(g.game_save)
+        response = feed_dog_service(g.game)
     except Exception as e:
         return jsonify({"message": str(e)}), 400
 
-    return jsonify({"message": message}), 200
+    return jsonify({"message": response}), 200
 
 @dog_api_blueprint.route("/play", methods=["GET"])
 @limiter.limit("5/second")
 def play_with_dog():
     try:
-        message = play_with_dog_service(g.game_save)
+        response = play_with_dog_service(g.game)
     except Exception as e:
         return jsonify({"message": str(e)}), 400
 
-    return jsonify({"message": message}), 200
+    return jsonify({"message": response}), 200
 
 @dog_api_blueprint.route("/sleep", methods=["GET"])
 @limiter.limit("5/second")
 def sleep_dog():
     try:
-        message = sleep_dog_service(g.game_save)
+        response = sleep_dog_service(g.game)
     except Exception as e:
         return jsonify({"message": str(e)}), 400
 
-    return jsonify({"message": message}), 200
+    return jsonify({"message": response}), 200

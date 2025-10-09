@@ -15,7 +15,8 @@ def initialize_database():
                 dog_fatigue INTEGER NOT NULL DEFAULT 0,
                 dog_is_sleeping BOOLEAN NOT NULL DEFAULT TRUE,
                 dog_is_dead BOOLEAN NOT NULL DEFAULT FALSE,
-                dog_warning VARCHAR(255) NOT NULL DEFAULT '')""")
+                dog_warning VARCHAR(255) NOT NULL DEFAULT '',
+                dog_message VARCHAR(255) NOT NULL DEFAULT '')""")
         connection.commit()
 
 def create_game(game_uuid: str, dog_name: str, dog_breed: str) -> None:
@@ -35,7 +36,8 @@ def update_dog_attributes(game_uuid: str, dog: Dog):
                 dog_fatigue = ?,
                 dog_is_sleeping = ?,
                 dog_is_dead = ?,
-                dog_warning = ?
+                dog_warning = ?,
+                dog_message = ?
             WHERE uuid = ?""", (*dog.get_status(), game_uuid))
         connection.commit()
 
