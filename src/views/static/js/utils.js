@@ -20,3 +20,7 @@ function showErrorMessage(errorElement, message) {
 
     setTimeout(() => errorElement.fadeOut(fadeTime), 5000);
 }
+
+function redirectToUrl(url) {
+    window.location = url;
+}

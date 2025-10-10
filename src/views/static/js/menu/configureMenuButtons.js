@@ -15,10 +15,10 @@ function configureOpenDialogButtons() {
 }
 
 function configureCloseDialogButtons() {
-    closeHowToPlayBtn.click(() => fadeOutElement("#how-to-play-dialog"));
-    closeAboutBtn.click(() => fadeOutElement("#about-dialog"));
-    closeLoadGameBtn.click(() => fadeOutElement("#load-game-dialog"));
-    closeNewGameBtn.click(() => fadeOutElement("#new-game-dialog"));   
+    closeHowToPlayBtn.click(() => fadeOutElement(howToPlayDialogElement));
+    closeAboutBtn.click(() => fadeOutElement(aboutDialogElement));
+    closeLoadGameBtn.click(() => fadeOutElement(loadGameDialogElement));
+    closeNewGameBtn.click(() => fadeOutElement(newGameDialogElement));   
 }
 
 function configureCreateNewGameButton() {
@@ -43,20 +43,16 @@ function configureCreateNewGameButton() {
                 dog_breed: dogBreed
             }),
             contentType: "application/json",
-            dataType: "json", 
-            success: (data) => {
-                window.location = data.redirect_url;
-            },
-            error: (xhr) => {
-                showErrorMessage(inputErrorElement, "Erro: " + xhr.responseJSON.error);
-            }
-        });
+            dataType: "json"
+        })
+        .done((data) => redirectToUrl(data.redirect_url))
+        .fail((xhr) => showErrorMessage(inputErrorElement, "Erro: " + xhr.responseJSON.error));
     });
 }
 
 function configureLoadGameButton() {
     sendGameUUIDBtn.click(() => {
-        gameUUID = gameUUIDElement.val();
+        const gameUUID = gameUUIDElement.val();
 
         if (!gameUUID) {
             showErrorMessage(gameUUIDInputErrorElement, "Cade o identificador?");
@@ -64,9 +60,7 @@ function configureLoadGameButton() {
         }
         
         $.get("load_existing_game", { game:  gameUUID})
-            .done((data) => {
-                window.location = data.redirect_url;
-            })
+            .done((data) => redirectToUrl(data.redirect_url))
             .fail((xhr) => {
                 showErrorMessage(gameUUIDInputErrorElement, xhr.responseJSON.error);
                 resetElementValue(gameUUIDElement);
