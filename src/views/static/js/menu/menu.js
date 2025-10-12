@@ -27,8 +27,8 @@ $(window).ready(() => {
     const text = splashTexts[Math.floor(Math.random() * splashTexts.length)];
     splashTextElement.text(text);
 
-    menuMusicElement[0].play();
-    pabloSoundElement[0].play();
+    playMenuMusic();
+    playPabloSound();
 });
 
 configureCreateNewGameButton();

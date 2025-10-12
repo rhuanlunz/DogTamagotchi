@@ -12,7 +12,7 @@ function resetElementValue(element) {
     element.val("");
 }
 
-function showErrorMessage(errorElement, message) {
+function showMessage(errorElement, message) {
     errorElement.stop(true, true);
     
     errorElement.text(message);

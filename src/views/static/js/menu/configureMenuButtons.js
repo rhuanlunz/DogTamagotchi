@@ -27,12 +27,12 @@ function configureCreateNewGameButton() {
         const dogBreed = dogBreedElement.val();
 
         if (!dogName.replaceAll(" ", "")) {
-            showErrorMessage(inputErrorElement, "Erro: Cade o nome do seu Pablo.?");
+            showMessage(inputErrorElement, "Erro: Cade o nome do seu Pablo.?");
             return;
         }
 
         if (!dogBreed.replaceAll(" ", "")) {
-            showErrorMessage(inputErrorElement, "Erro: Teu Pablo. não tem raça?");
+            showMessage(inputErrorElement, "Erro: Teu Pablo. não tem raça?");
             return;
         }
         
@@ -46,7 +46,7 @@ function configureCreateNewGameButton() {
             dataType: "json"
         })
         .done((data) => redirectToUrl(data.redirect_url))
-        .fail((xhr) => showErrorMessage(inputErrorElement, "Erro: " + xhr.responseJSON.error));
+        .fail((xhr) => showMessage(inputErrorElement, "Erro: " + xhr.responseJSON.error));
     });
 }
 
@@ -55,14 +55,14 @@ function configureLoadGameButton() {
         const gameUUID = gameUUIDElement.val();
 
         if (!gameUUID) {
-            showErrorMessage(gameUUIDInputErrorElement, "Cade o identificador?");
+            showMessage(gameUUIDInputErrorElement, "Cade o identificador?");
             return;
         }
         
         $.get("load_existing_game", { game:  gameUUID})
             .done((data) => redirectToUrl(data.redirect_url))
             .fail((xhr) => {
-                showErrorMessage(gameUUIDInputErrorElement, xhr.responseJSON.error);
+                showMessage(gameUUIDInputErrorElement, xhr.responseJSON.error);
                 resetElementValue(gameUUIDElement);
             });
     });
